@@ -2,6 +2,13 @@ import java.text.SimpleDateFormat
 
 buildscript {
     repositories {
+        // maven {
+        //     url = uri("https://maven.pkg.github.com/openlawteam/solcJ")
+        //     credentials {
+        //         username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+        //         password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+        //     }
+        // }
         jcenter()
         maven { url 'https://repo.spring.io/plugins-release' }
     }
@@ -36,11 +43,9 @@ if (project.hasProperty("mainClass")) {
     mainClassName = mainClass
 }
 
-
 ext.generatedSrcDir = file('src/gen/java')
 
 sourceSets.main.java.srcDirs += generatedSrcDir
-
 
 tasks.withType(JavaCompile){
     options.warnings = false
@@ -130,7 +135,7 @@ dependencies {
 
     compile "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
 
-    compile "org.ethereum:solcJ-all:0.4.25"                  // Solidity Compiler win/mac/linux binaries
+    compile "org.ethereum:solcj-all:0.4.25"                  // Solidity Compiler win/mac/linux binaries
 
     compile "com.google.guava:guava:24.1-jre"
 
@@ -236,20 +241,20 @@ artifactoryPublish.onlyIf {
                     branchName.startsWith('stage'))
 }
 
-bintray {
-    user = bintrayUsername
-    key = bintrayPassword
+// bintray {
+//     user = bintrayUsername
+//     key = bintrayPassword
 
-    configurations = ['archives']
+//     configurations = ['archives']
 
-    dryRun = false //Whether to run this as dry-run, without deploying
-    publish = true //If version should be auto published after an upload
-    pkg {
-        userOrg = 'ethereum' //An optional organization name when the repo belongs to one of the user's orgs
-        repo = 'maven'
-        name = 'org.ethereum'
-    }
-}
+//     dryRun = false //Whether to run this as dry-run, without deploying
+//     publish = true //If version should be auto published after an upload
+//     pkg {
+//         userOrg = 'ethereum' //An optional organization name when the repo belongs to one of the user's orgs
+//         repo = 'maven'
+//         name = 'org.ethereum'
+//     }
+// }
 
 bintrayUpload.onlyIf {
     // comment 'false' and uncomment the next line to publish next release
@@ -270,12 +275,12 @@ tasks.processResources.doLast(){
     versionfile.text = 'build.hash=' + gitCommitHash() + '\n' + 'build.time=' + buildTime() + '\n' + 'build.branch=' + gitCurBranch() + '\n'
 }
 
-task publish {
+// task publish {
 
-    println "publishing if master || develop current branch: " + branchName
-    description = "Publishes snapshots to oss.jfrog.org and releases to Bintray/JCenter"
-    dependsOn artifactoryPublish, bintrayUpload
-}
+//     println "publishing if master || develop current branch: " + branchName
+//     description = "Publishes snapshots to oss.jfrog.org and releases to Bintray/JCenter"
+//     dependsOn artifactoryPublish
+// }
 
 
 def customizePom(pom, gradleProject) {
