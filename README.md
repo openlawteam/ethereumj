@@ -21,7 +21,7 @@ We keep EthereumJ as thin as possible. For [JSON-RPC](https://github.com/ethereu
    <dependency>
      <groupId>org.ethereum</groupId>
      <artifactId>ethereumj-core</artifactId>
-     <version>1.12.0-RELEASE</version>
+     <version>1.13.0-RELEASE</version>
    </dependency>
 ```
 

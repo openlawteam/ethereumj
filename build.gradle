@@ -44,8 +44,8 @@ subprojects {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/openlawteam/*")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                username = System.getenv("USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
         maven { url 'http://nexus.nuls.center/nexus/content/repositories/public' }
@@ -58,8 +58,8 @@ subprojects {
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/openlawteam/ethereumj")
                 credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                    password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                   username = System.getenv("USERNAME")
+                   password = System.getenv("GITHUB_TOKEN")
                 }
             }
         }
