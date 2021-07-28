@@ -4,6 +4,9 @@
 [![Build Status](https://travis-ci.org/ethereum/ethereumj.svg?branch=master)](https://travis-ci.org/ethereum/ethereumj)
 [![Coverage Status](https://coveralls.io/repos/ethereum/ethereumj/badge.png?branch=master)](https://coveralls.io/r/ethereum/ethereumj?branch=master)
 
+## :no_entry: Deprecated :no_entry:
+This project is not supported anymore. If you have any question or would like to contribute find us on [Gitter](https://gitter.im/ethereum/ethereumj).
+
 
 # About
 EthereumJ is a pure-Java implementation of the Ethereum protocol. For high-level information about Ethereum and its goals, visit [ethereum.org](https://ethereum.org). The [ethereum white paper](https://github.com/ethereum/wiki/wiki/White-Paper) provides a complete conceptual overview, and the [yellow paper](http://gavwood.com/Paper.pdf) provides a formal definition of the protocol.
@@ -18,7 +21,7 @@ We keep EthereumJ as thin as possible. For [JSON-RPC](https://github.com/ethereu
    <dependency>
      <groupId>org.ethereum</groupId>
      <artifactId>ethereumj-core</artifactId>
-     <version>1.11.0-RELEASE</version>
+     <version>1.12.0-RELEASE</version>
    </dependency>
 ```
 
@@ -67,7 +70,7 @@ java -jar ethereumj-core/build/libs/ethereumj-core-*-all.jar
 Please, note, snapshots are not stable and are currently in development! If you still want to try it:
 
  - Add https://oss.jfrog.org/libs-snapshot/ as a repository to your build script
- - Add a dependency on `org.ethereum:ethereumj-core:${VERSION}`, where `${VERSION}` is of the form `1.11.0-SNAPSHOT`.
+ - Add a dependency on `org.ethereum:ethereumj-core:${VERSION}`, where `${VERSION}` is of the form `1.13.0-SNAPSHOT`.
 
 Example:
 
@@ -81,7 +84,7 @@ Example:
     <dependency>
        <groupId>org.ethereum</groupId>
        <artifactId>ethereumj-core</artifactId>
-       <version>1.11.0-SNAPSHOT</version>
+       <version>1.13.0-SNAPSHOT</version>
     </dependency>
 
 ##### Importing project to IntelliJ IDEA: 

@@ -1,4 +1,7 @@
-wrapper.gradleVersion = '4.6'
+wrapper {
+    gradleVersion = "5.6.2"
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
 
 allprojects {
     apply plugin: 'eclipse'
@@ -21,6 +24,7 @@ def gitCurBranch() {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
+    apply plugin: 'maven-publish'
 
     def config = new ConfigSlurper().parse(new File("$projectDir/src/main/resources/version.properties").toURI().toURL())
 
@@ -36,7 +40,39 @@ subprojects {
     compileTestJava.options.encoding = 'UTF-8'
 
     repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/openlawteam/*")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+        maven { url 'http://nexus.nuls.center/nexus/content/repositories/public' }
         jcenter()
-        maven { url "https://dl.bintray.com/ethereum/maven/" }
     }
+
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/openlawteam/ethereumj")
+                credentials {
+                    username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                    password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                }
+            }
+        }
+        publications {
+            gpr(MavenPublication) {
+                // pkg {
+                //     userOrg = 'ethereum' //An optional organization name when the repo belongs to one of the user's orgs
+                //     repo = 'maven'
+                //     name = 'org.ethereum'
+                // }
+                from(components.java)
+            }
+        }
+    }
+
 }
